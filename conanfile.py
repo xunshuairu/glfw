@@ -1,4 +1,4 @@
-from conans import ConanFile, CMake
+from conans import ConanFile, CMake, tools
 
 class GlfwConan(ConanFile):
     name = "glfw"
@@ -8,8 +8,12 @@ class GlfwConan(ConanFile):
     license = "Zlib"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
+    exports_sources = "src/*", "include/*", "deps/*"
 
     def package(self):
+        self.copy("*.h", "include", "include", keep_path=True)
+        self.copy("*.h", "include", "deps", keep_path=True)
+        self.copy("*.c", "include", "deps", keep_path=True)
         self.copy("*.dll", dst="bin", src="src") # From bin to bin
         self.copy("*.dylib*", dst="bin", src="src") # From lib to bin
         self.copy("*.a*", dst="bin", src="src") # From lib to bin
@@ -20,6 +24,3 @@ class GlfwConan(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-
-    def package_info(self):
-        self.cpp_info.libs = self.collect_libs()
