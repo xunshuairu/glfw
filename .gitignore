@@ -83,3 +83,6 @@ tests/title
 tests/vulkan
 tests/windows
 
+#other
+build/**
+
