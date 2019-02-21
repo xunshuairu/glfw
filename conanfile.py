@@ -1,5 +1,5 @@
 from conans import ConanFile, CMake, tools
-
+import os
 class GlfwConan(ConanFile):
     name = "glfw"
     version = "3.2.1"
@@ -18,9 +18,12 @@ class GlfwConan(ConanFile):
         self.copy("*.dylib*", dst="bin", src="src") # From lib to bin
         self.copy("*.a*", dst="bin", src="src") # From lib to bin
         self.copy("*.so*", dst="bin", src="src") # From lib to bin
-        self.copy("*.lib*", dst="bin", src="src") # From lib to bin
+        self.copy("*.lib*", dst="lib", src="src") # From lib to bin
 
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+
+    def package_info(self):
+        self.cpp_info.libs = tools.collect_libs(self)
