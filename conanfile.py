@@ -16,9 +16,9 @@ class GlfwConan(ConanFile):
         self.copy("*.c", "include", "deps", keep_path=True)
         self.copy("*.dll", dst="bin", src="src") # From bin to bin
         self.copy("*.dylib*", dst="bin", src="src") # From lib to bin
-        self.copy("*.a*", dst="bin", src="src") # From lib to bin
-        self.copy("*.so*", dst="bin", src="src") # From lib to bin
-        self.copy("*.lib*", dst="lib", src="src") # From lib to bin
+        self.copy("*.a", dst="lib", src="src") # From lib to bin
+        self.copy("*.so", dst="lib", src="src") # From lib to bin
+        self.copy("*.lib", dst="lib", src="src") # From lib to bin
 
     def build(self):
         cmake = CMake(self)
