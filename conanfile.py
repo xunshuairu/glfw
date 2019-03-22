@@ -26,4 +26,4 @@ class GlfwConan(ConanFile):
         cmake.build()
 
     def package_info(self):
-        self.cpp_info.libs = ["glfw3"]
+        self.cpp_info.static.libs = ["libglfw3.a"]
